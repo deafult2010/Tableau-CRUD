@@ -111,12 +111,13 @@ app.get('/obs_list/:member/:client', async (req, res) => {
 //create an obs_list
 app.post('/obs_list', async (req, res) => {
     try {
-        const { obsStartDate, obsEndDate, obsMember, obsClient, clientOnObsList } = req.body;
+        const { obsStartDate, obsEndDate, member, client } = req.body;
         const newTodo = await pool.promise().query(
             `INSERT INTO obs_list (start_date, end_date, member_code, client_lei, client_on_obs_list) values 
-            ('${obsStartDate}', '${obsEndDate}', '${obsMember}', '${obsClient}','${clientOnObsList}')`
+            ('${obsStartDate}', '${obsEndDate}', '${member}', '${client}', '1')`
         );
         res.json("Row Added Successfully");
+        console.log(req.body)
     } catch (err) {
         console.error(err.message);
     }
@@ -166,10 +167,10 @@ app.get('/comments/:member/:client', async (req, res) => {
 //create a comment
 app.post('/comments', async (req, res) => {
     try {
-        const { commentsStartDate, commentsEndDate, commentsMember, commentsClient, newComment } = req.body;
+        const { commentsStartDate, commentsEndDate, member, client, newComment } = req.body;
         const newTodo = await pool.promise().query(
             `INSERT INTO comments (start_date, end_date, member_code, client_lei, comment) values 
-            ('${commentsStartDate}', '${commentsEndDate}', '${commentsMember}', '${commentsClient}','${newComment}')`
+            ('${commentsStartDate}', '${commentsEndDate}', '${member}', '${client}','${newComment}')`
         );
         res.json("Row Added Successfully");
     } catch (err) {

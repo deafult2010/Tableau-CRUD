@@ -10,14 +10,9 @@ export default function ListTodos(props) {
 
     const [obsStartDate, setObsStartDate] = useState('');
     const [obsEndDate, setObsEndDate] = useState('');
-    const [obsMember, setObsMember] = useState('loading...');
-    const [obsClient, setObsClient] = useState('loading...');
-    const [clientOnObsList, setClientOnObsList] = useState('loading...');
 
     const [commentsStartDate, setCommentsStartDate] = useState('');
     const [commentsEndDate, setCommentsEndDate] = useState('');
-    const [commentsMember, setCommentsMember] = useState('loading...');
-    const [commentsClient, setCommentsClient] = useState('loading...');
     const [newComment, setNewComment] = useState('');
 
     const [member, setMember] = useState('');
@@ -121,9 +116,6 @@ export default function ListTodos(props) {
                 return { id: obsList.id, start_date: formatDate(obsList.start_date), end_date: formatDate(obsList.end_date), member_code: obsList.member_code, client_lei: obsList.client_lei, client_on_obs_list: obsList.client_on_obs_list }
             })
             setObsList(jsonDataFormatted);
-            setObsMember(jsonData[0].member_code);
-            setObsClient(jsonData[0].client_lei);
-            setClientOnObsList(jsonData[0].client_on_obs_list);
 
         } catch (err) {
             console.error(err.message)
@@ -133,7 +125,7 @@ export default function ListTodos(props) {
     const onSubmitObsForm = async (e) => {
         e.preventDefault();
         try {
-            const body = { obsStartDate, obsEndDate, obsMember, obsClient, clientOnObsList };
+            const body = { obsStartDate, obsEndDate, member, client };
             await fetch("https://tableaucrudform.herokuapp.com/obs_list", {
                 // await fetch("http://localhost:5000/obs_list", {
                 method: "POST",
@@ -165,8 +157,8 @@ export default function ListTodos(props) {
 
     const deleteObsList = async (id) => {
         try {
-            // const deleteObsList = await fetch(`https://tableaucrudform.herokuapp.com/obs_lists/${id}`, {
-            await fetch(`http://localhost:5000/obs_list/${id}`, {
+            await fetch(`https://tableaucrudform.herokuapp.com/obs_lists/${id}`, {
+                // await fetch(`http://localhost:5000/obs_list/${id}`, {
                 method: "DELETE"
             });
             setObsList(obsList.filter(obsList => obsList.id !== id));
@@ -187,8 +179,6 @@ export default function ListTodos(props) {
                 return { id: comments.id, start_date: formatDate(comments.start_date), end_date: formatDate(comments.end_date), member_code: comments.member_code, client_lei: comments.client_lei, comment: comments.comment }
             })
             setComments(jsonDataFormatted);
-            setCommentsMember(jsonData[0].member_code);
-            setCommentsClient(jsonData[0].client_lei);
 
         } catch (err) {
             console.error(err.message)
@@ -198,7 +188,7 @@ export default function ListTodos(props) {
     const onSubmitCommentsForm = async (e) => {
         e.preventDefault();
         try {
-            const body = { commentsStartDate, commentsEndDate, commentsMember, commentsClient, newComment };
+            const body = { commentsStartDate, commentsEndDate, member, client, newComment };
             await fetch("https://tableaucrudform.herokuapp.com/comments", {
                 // await fetch("http://localhost:5000/comments", {
                 method: "POST",
@@ -252,6 +242,7 @@ export default function ListTodos(props) {
     useEffect(() => {
         getObsList(member, client);
         getComments(member, client);
+
         // eslint-disable-next-line
     }, [member, client])
 
@@ -296,39 +287,39 @@ export default function ListTodos(props) {
                     </table>
                 </form> */}
 
-                <h1 className='text-center mt-5'>Edit Obs list</h1>
+                <h1 className='text-center mt-5' style={{ fontSize: '24px' }}>Edit Obs List</h1>
                 <form className='d-flex' onSubmit={onSubmitObsForm}>
                     <table className="table mt-1" style={{ tableLayout: 'fixed' }}>
                         <thead>
-                            <tr>
-                                <th className="align-middle text-center" style={{ padding: '0px', width: '150px' }}>Start Date</th>
-                                <th className="align-middle text-center" style={{ padding: '0px', width: '150px' }}>End Date</th>
-                                <th className="align-middle text-center" style={{ padding: '0px', width: '80px' }}>Member Code</th>
-                                <th className="align-middle text-center" style={{ padding: '0px', width: '165px' }}>Client LEI</th>
-                                <th className="align-middle text-center" style={{ padding: '0px', width: '80px' }}>Client_On <br /> Obs_List</th>
-                                <th className="align-middle text-center" style={{ padding: '0px', width: '80px' }}>Add/Edit</th>
-                                <th className="align-middle text-center" style={{ padding: '0px', width: '80px' }}>Delete</th>
+                            <tr style={{ fontSize: '12px' }}>
+                                <th className="align-middle text-center" style={{ padding: '0px', width: '110px' }}>Start Date</th>
+                                <th className="align-middle text-center" style={{ padding: '0px', width: '110px' }}>End Date</th>
+                                <th className="align-middle text-center" style={{ padding: '0px', width: '55px' }}>Member Code</th>
+                                <th className="align-middle text-center" style={{ padding: '0px', width: '110px' }}>Client LEI</th>
+                                <th className="align-middle text-center" style={{ padding: '0px', width: '55px' }}>Client_On <br /> Obs_List</th>
+                                <th className="align-middle text-center" style={{ padding: '0px', width: '55px' }}>Add/Edit</th>
+                                <th className="align-middle text-center" style={{ padding: '0px', width: '55px' }}>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
                             {obsList.map((obsList, i) => (
-                                <tr key={obsList.id}>
-                                    <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ width: '150px', padding: '2px' }} type="date" value={obsList.start_date} onChange={e => handleObsStartDateChange(e, i)} /></td>
-                                    <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ width: '150px', padding: '2px' }} type="date" value={obsList.end_date} onChange={e => handleObsEndDateChange(e, i)} /></td>
+                                <tr key={obsList.id} style={{ fontSize: '10px' }}>
+                                    <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '10px' }} type="date" value={obsList.start_date} onChange={e => handleObsStartDateChange(e, i)} /></td>
+                                    <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '10px' }} type="date" value={obsList.end_date} onChange={e => handleObsEndDateChange(e, i)} /></td>
                                     <td className="align-middle text-center" style={{ padding: '0px' }}>{obsList.member_code}</td>
                                     <td className="align-middle text-center" style={{ padding: '0px' }}>{obsList.client_lei}</td>
                                     <td className="align-middle text-center" style={{ padding: '0px' }}>{obsList.client_on_obs_list}</td>
-                                    <td className="align-middle text-center" style={{ padding: '0px' }}><button type="button" className='btn btn-success' onClick={() => editObsList(i, obsList.id)}>Edit</button></td>
-                                    <td className="align-middle text-center" style={{ padding: '0px' }}><button type="button" className='btn btn-danger' onClick={() => deleteObsList(obsList.id)}>Delete</button></td>
+                                    <td className="align-middle text-center" style={{ padding: '0px' }}><button type="button" className='btn btn-success' style={{ fontSize: '10px' }} onClick={() => editObsList(i, obsList.id)}>Edit</button></td>
+                                    <td className="align-middle text-center" style={{ padding: '0px' }}><button type="button" className='btn btn-danger' style={{ fontSize: '10px' }} onClick={() => deleteObsList(obsList.id)}>Delete</button></td>
                                 </tr>
                             ))}
-                            <tr>
-                                <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ width: '150px', padding: '2px' }} type="date" value={obsStartDate} onChange={e => setObsStartDate(e.target.value)} /></td>
-                                <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ width: '150px', padding: '2px' }} type="date" value={obsEndDate} onChange={e => setObsEndDate(e.target.value)} /></td>
-                                <td className="align-middle text-center" style={{ padding: '0px' }}>{obsMember}</td>
-                                <td className="align-middle text-center" style={{ padding: '0px' }}>{obsClient}</td>
-                                <td className="align-middle text-center" style={{ padding: '0px' }}>{clientOnObsList}</td>
-                                <td className="align-middle text-center" style={{ padding: '0px' }}><button className='btn btn-primary'>Add</button></td>
+                            <tr style={{ fontSize: '10px' }}>
+                                <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '10px' }} type="date" value={obsStartDate} onChange={e => setObsStartDate(e.target.value)} /></td>
+                                <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '10px' }} type="date" value={obsEndDate} onChange={e => setObsEndDate(e.target.value)} /></td>
+                                <td className="align-middle text-center" style={{ padding: '0px' }}>{member}</td>
+                                <td className="align-middle text-center" style={{ padding: '0px' }}>{client}</td>
+                                <td className="align-middle text-center" style={{ padding: '0px' }}>1</td>
+                                <td className="align-middle text-center" style={{ padding: '0px' }}><button className='btn btn-primary' style={{ fontSize: '10px' }}>Add</button></td>
                                 <td></td>
                             </tr>
                         </tbody>
@@ -337,39 +328,39 @@ export default function ListTodos(props) {
 
 
 
-                <h1 className='text-center mt-5'>Edit Comments list</h1>
+                <h1 className='text-center mt-5' style={{ fontSize: '24px' }}>Edit Comments</h1>
                 <form className='d-flex' onSubmit={onSubmitCommentsForm}>
                     <table className="table mt-1">
                         <thead>
-                            <tr>
-                                <th className="align-middle text-center" style={{ padding: '0px', width: '150px' }}>Start Date</th>
-                                <th className="align-middle text-center" style={{ padding: '0px', width: '150px' }}>End Date</th>
-                                <th className="align-middle text-center" style={{ padding: '0px', width: '80px' }}>Member Code</th>
-                                <th className="align-middle text-center" style={{ padding: '0px', width: '165px' }}>Client LEI</th>
-                                <th className="align-middle text-center" style={{ padding: '0px', width: '200px' }}>Comments</th>
-                                <th className="align-middle text-center" style={{ padding: '0px', width: '80px' }}>Add/Edit</th>
-                                <th className="align-middle text-center" style={{ padding: '0px', width: '80px' }}>Delete</th>
+                            <tr style={{ fontSize: '12px' }}>
+                                <th className="align-middle text-center" style={{ padding: '0px', width: '110px' }}>Start Date</th>
+                                <th className="align-middle text-center" style={{ padding: '0px', width: '110px' }}>End Date</th>
+                                <th className="align-middle text-center" style={{ padding: '0px', width: '55px' }}>Member Code</th>
+                                <th className="align-middle text-center" style={{ padding: '0px', width: '110px' }}>Client LEI</th>
+                                <th className="align-middle text-center" style={{ padding: '0px', width: '130px' }}>Comments</th>
+                                <th className="align-middle text-center" style={{ padding: '0px', width: '55px' }}>Add/Edit</th>
+                                <th className="align-middle text-center" style={{ padding: '0px', width: '55px' }}>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
                             {comments.map((comments, i) => (
-                                <tr key={comments.id}>
-                                    <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ width: '150px', padding: '2px' }} type="date" value={comments.start_date} onChange={e => handleCommentStartDateChange(e, i)} /></td>
-                                    <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ width: '150px', padding: '2px' }} type="date" value={comments.end_date} onChange={e => handleCommentEndDateChange(e, i)} /></td>
+                                <tr key={comments.id} style={{ fontSize: '10px' }}>
+                                    <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '10px' }} type="date" value={comments.start_date} onChange={e => handleCommentStartDateChange(e, i)} /></td>
+                                    <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '10px' }} type="date" value={comments.end_date} onChange={e => handleCommentEndDateChange(e, i)} /></td>
                                     <td className="align-middle text-center" style={{ padding: '0px' }}>{comments.member_code}</td>
                                     <td className="align-middle text-center" style={{ padding: '0px' }}>{comments.client_lei}</td>
-                                    <td className="align-middle text-center" style={{ padding: '0px' }}><textarea className="form-control" style={{ width: '200px', padding: '2px' }} rows='3' value={comments.comment} onChange={e => handleCommentCommentChange(e, i)} /></td>
-                                    <td className="align-middle text-center" style={{ padding: '0px' }}><button type="button" className='btn btn-success' onClick={() => editComments(i, comments.id)}>Edit</button></td>
-                                    <td className="align-middle text-center" style={{ padding: '0px' }}><button type="button" className='btn btn-danger' onClick={() => deleteComments(comments.id)}>Delete</button></td>
+                                    <td className="align-middle text-center" style={{ padding: '0px' }}><textarea className="form-control" style={{ minwWidth: '130px', padding: '2px', fontSize: '10px' }} rows='3' value={comments.comment} onChange={e => handleCommentCommentChange(e, i)} /></td>
+                                    <td className="align-middle text-center" style={{ padding: '0px' }}><button type="button" className='btn btn-success' style={{ fontSize: '10px' }} onClick={() => editComments(i, comments.id)}>Edit</button></td>
+                                    <td className="align-middle text-center" style={{ padding: '0px' }}><button type="button" className='btn btn-danger' style={{ fontSize: '10px' }} onClick={() => deleteComments(comments.id)}>Delete</button></td>
                                 </tr>
                             ))}
-                            <tr>
-                                <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ width: '150px', padding: '2px' }} type="date" value={commentsStartDate} onChange={e => setCommentsStartDate(e.target.value)} /></td>
-                                <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ width: '150px', padding: '2px' }} type="date" value={commentsEndDate} onChange={e => setCommentsEndDate(e.target.value)} /></td>
-                                <td className="align-middle text-center" style={{ padding: '0px' }}>{commentsMember}</td>
-                                <td className="align-middle text-center" style={{ padding: '0px' }}>{commentsClient}</td>
-                                <td className="align-middle text-center" style={{ padding: '0px' }}><textarea className="form-control" style={{ width: '200px', padding: '2px' }} rows='3' value={newComment} onChange={e => setNewComment(e.target.value)} /></td>
-                                <td className="align-middle text-center" style={{ padding: '0px' }}><button className='btn btn-primary'>Add</button></td>
+                            <tr style={{ fontSize: '10px' }}>
+                                <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '10px' }} type="date" value={commentsStartDate} onChange={e => setCommentsStartDate(e.target.value)} /></td>
+                                <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '10px' }} type="date" value={commentsEndDate} onChange={e => setCommentsEndDate(e.target.value)} /></td>
+                                <td className="align-middle text-center" style={{ padding: '0px' }}>{member}</td>
+                                <td className="align-middle text-center" style={{ padding: '0px' }}>{client}</td>
+                                <td className="align-middle text-center" style={{ padding: '0px' }}><textarea className="form-control" style={{ minWidth: '130px', padding: '2px', fontSize: '10px' }} rows='3' value={newComment} onChange={e => setNewComment(e.target.value)} /></td>
+                                <td className="align-middle text-center" style={{ padding: '0px' }}><button className='btn btn-primary' style={{ fontSize: '10px' }}>Add</button></td>
                                 <td></td>
                             </tr>
                         </tbody>
