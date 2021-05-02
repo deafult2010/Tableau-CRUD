@@ -287,11 +287,11 @@ export default function ListTodos(props) {
                     </table>
                 </form> */}
 
-                <h1 className='text-center mt-5' style={{ fontSize: '24px' }}>Edit Obs List</h1>
+                <h1 className='text-center mt-5' style={{ fontSize: '36px' }}>Edit Obs List</h1>
                 <form className='d-flex' onSubmit={onSubmitObsForm}>
                     <table className="table mt-1" style={{ tableLayout: 'fixed' }}>
                         <thead>
-                            <tr style={{ fontSize: '12px' }}>
+                            <tr style={{ fontSize: '18px' }}>
                                 <th className="align-middle text-center" style={{ padding: '0px', width: '110px' }}>Start Date</th>
                                 <th className="align-middle text-center" style={{ padding: '0px', width: '110px' }}>End Date</th>
                                 <th className="align-middle text-center" style={{ padding: '0px', width: '55px' }}>Member Code</th>
@@ -303,23 +303,23 @@ export default function ListTodos(props) {
                         </thead>
                         <tbody>
                             {obsList.map((obsList, i) => (
-                                <tr key={obsList.id} style={{ fontSize: '10px' }}>
-                                    <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '10px' }} type="date" value={obsList.start_date} onChange={e => handleObsStartDateChange(e, i)} /></td>
-                                    <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '10px' }} type="date" value={obsList.end_date} onChange={e => handleObsEndDateChange(e, i)} /></td>
+                                <tr key={obsList.id} style={{ fontSize: '15px' }}>
+                                    <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '15px' }} type="date" value={obsList.start_date} onChange={e => handleObsStartDateChange(e, i)} /></td>
+                                    <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '15px' }} type="date" value={obsList.end_date} onChange={e => handleObsEndDateChange(e, i)} /></td>
                                     <td className="align-middle text-center" style={{ padding: '0px' }}>{obsList.member_code}</td>
                                     <td className="align-middle text-center" style={{ padding: '0px' }}>{obsList.client_lei}</td>
                                     <td className="align-middle text-center" style={{ padding: '0px' }}>{obsList.client_on_obs_list}</td>
-                                    <td className="align-middle text-center" style={{ padding: '0px' }}><button type="button" className='btn btn-success' style={{ fontSize: '10px' }} onClick={() => editObsList(i, obsList.id)}>Edit</button></td>
-                                    <td className="align-middle text-center" style={{ padding: '0px' }}><button type="button" className='btn btn-danger' style={{ fontSize: '10px' }} onClick={() => deleteObsList(obsList.id)}>Delete</button></td>
+                                    <td className="align-middle text-center" style={{ padding: '0px' }}><button type="button" className='btn btn-success' style={{ fontSize: '15px' }} onClick={() => editObsList(i, obsList.id)}>Edit</button></td>
+                                    <td className="align-middle text-center" style={{ padding: '0px' }}><button type="button" className='btn btn-danger' style={{ fontSize: '15px' }} onClick={() => deleteObsList(obsList.id)}>Delete</button></td>
                                 </tr>
                             ))}
-                            <tr style={{ fontSize: '10px' }}>
-                                <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '10px' }} type="date" value={obsStartDate} onChange={e => setObsStartDate(e.target.value)} /></td>
-                                <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '10px' }} type="date" value={obsEndDate} onChange={e => setObsEndDate(e.target.value)} /></td>
+                            <tr style={{ fontSize: '15px' }}>
+                                <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '15px' }} type="date" value={obsStartDate} onChange={e => setObsStartDate(e.target.value)} /></td>
+                                <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '15px' }} type="date" value={obsEndDate} onChange={e => setObsEndDate(e.target.value)} /></td>
                                 <td className="align-middle text-center" style={{ padding: '0px' }}>{member}</td>
                                 <td className="align-middle text-center" style={{ padding: '0px' }}>{client}</td>
                                 <td className="align-middle text-center" style={{ padding: '0px' }}>1</td>
-                                <td className="align-middle text-center" style={{ padding: '0px' }}><button className='btn btn-primary' style={{ fontSize: '10px' }}>Add</button></td>
+                                <td className="align-middle text-center" style={{ padding: '0px' }}><button className='btn btn-primary' style={{ fontSize: '15px' }}>Add</button></td>
                                 <td></td>
                             </tr>
                         </tbody>
@@ -328,11 +328,11 @@ export default function ListTodos(props) {
 
 
 
-                <h1 className='text-center mt-5' style={{ fontSize: '24px' }}>Edit Comments</h1>
+                <h1 className='text-center mt-5' style={{ fontSize: '36px' }}>Edit Comments</h1>
                 <form className='d-flex' onSubmit={onSubmitCommentsForm}>
                     <table className="table mt-1">
                         <thead>
-                            <tr style={{ fontSize: '12px' }}>
+                            <tr style={{ fontSize: '18px' }}>
                                 <th className="align-middle text-center" style={{ padding: '0px', width: '110px' }}>Start Date</th>
                                 <th className="align-middle text-center" style={{ padding: '0px', width: '110px' }}>End Date</th>
                                 <th className="align-middle text-center" style={{ padding: '0px', width: '55px' }}>Member Code</th>
@@ -344,23 +344,23 @@ export default function ListTodos(props) {
                         </thead>
                         <tbody>
                             {comments.map((comments, i) => (
-                                <tr key={comments.id} style={{ fontSize: '10px' }}>
-                                    <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '10px' }} type="date" value={comments.start_date} onChange={e => handleCommentStartDateChange(e, i)} /></td>
-                                    <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '10px' }} type="date" value={comments.end_date} onChange={e => handleCommentEndDateChange(e, i)} /></td>
+                                <tr key={comments.id} style={{ fontSize: '15px' }}>
+                                    <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '15px' }} type="date" value={comments.start_date} onChange={e => handleCommentStartDateChange(e, i)} /></td>
+                                    <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '15px' }} type="date" value={comments.end_date} onChange={e => handleCommentEndDateChange(e, i)} /></td>
                                     <td className="align-middle text-center" style={{ padding: '0px' }}>{comments.member_code}</td>
                                     <td className="align-middle text-center" style={{ padding: '0px' }}>{comments.client_lei}</td>
-                                    <td className="align-middle text-center" style={{ padding: '0px' }}><textarea className="form-control" style={{ minwWidth: '130px', padding: '2px', fontSize: '10px' }} rows='3' value={comments.comment} onChange={e => handleCommentCommentChange(e, i)} /></td>
-                                    <td className="align-middle text-center" style={{ padding: '0px' }}><button type="button" className='btn btn-success' style={{ fontSize: '10px' }} onClick={() => editComments(i, comments.id)}>Edit</button></td>
-                                    <td className="align-middle text-center" style={{ padding: '0px' }}><button type="button" className='btn btn-danger' style={{ fontSize: '10px' }} onClick={() => deleteComments(comments.id)}>Delete</button></td>
+                                    <td className="align-middle text-center" style={{ padding: '0px' }}><textarea className="form-control" style={{ minwWidth: '130px', padding: '2px', fontSize: '15px' }} rows='3' value={comments.comment} onChange={e => handleCommentCommentChange(e, i)} /></td>
+                                    <td className="align-middle text-center" style={{ padding: '0px' }}><button type="button" className='btn btn-success' style={{ fontSize: '15px' }} onClick={() => editComments(i, comments.id)}>Edit</button></td>
+                                    <td className="align-middle text-center" style={{ padding: '0px' }}><button type="button" className='btn btn-danger' style={{ fontSize: '15px' }} onClick={() => deleteComments(comments.id)}>Delete</button></td>
                                 </tr>
                             ))}
-                            <tr style={{ fontSize: '10px' }}>
-                                <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '10px' }} type="date" value={commentsStartDate} onChange={e => setCommentsStartDate(e.target.value)} /></td>
-                                <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '10px' }} type="date" value={commentsEndDate} onChange={e => setCommentsEndDate(e.target.value)} /></td>
+                            <tr style={{ fontSize: '15px' }}>
+                                <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '15px' }} type="date" value={commentsStartDate} onChange={e => setCommentsStartDate(e.target.value)} /></td>
+                                <td className="align-middle text-center" style={{ padding: '0px' }}><input className="form-control" style={{ minwidth: '110px', padding: '2px', fontSize: '15px' }} type="date" value={commentsEndDate} onChange={e => setCommentsEndDate(e.target.value)} /></td>
                                 <td className="align-middle text-center" style={{ padding: '0px' }}>{member}</td>
                                 <td className="align-middle text-center" style={{ padding: '0px' }}>{client}</td>
-                                <td className="align-middle text-center" style={{ padding: '0px' }}><textarea className="form-control" style={{ minWidth: '130px', padding: '2px', fontSize: '10px' }} rows='3' value={newComment} onChange={e => setNewComment(e.target.value)} /></td>
-                                <td className="align-middle text-center" style={{ padding: '0px' }}><button className='btn btn-primary' style={{ fontSize: '10px' }}>Add</button></td>
+                                <td className="align-middle text-center" style={{ padding: '0px' }}><textarea className="form-control" style={{ minWidth: '130px', padding: '2px', fontSize: '15px' }} rows='3' value={newComment} onChange={e => setNewComment(e.target.value)} /></td>
+                                <td className="align-middle text-center" style={{ padding: '0px' }}><button className='btn btn-primary' style={{ fontSize: '15px' }}>Add</button></td>
                                 <td></td>
                             </tr>
                         </tbody>

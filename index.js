@@ -85,7 +85,7 @@ app.delete('/todos/:id', async (req, res) => {
 app.get('/tiering', async (req, res) => {
     try {
         const allTiering = await pool.promise().query(
-            `SELECT * FROM tiering WHERE business_date = '2021-04-28'`
+            `SELECT SUBSTRING(business_date, 1, 10) business_date, client_name, client_lei, client_im, member_im, tiering_concentration, client_on_obs_list, member_code, member_name, comment FROM tiering`
         );
         res.json(allTiering[0]);
     } catch (err) {
