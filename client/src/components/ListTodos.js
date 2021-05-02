@@ -114,7 +114,7 @@ export default function ListTodos(props) {
 
     const getObsList = async () => {
         try {
-            const response = await fetch(`https://tableaucrudform.herokuapp.com/${member}/${client}`)
+            const response = await fetch(`https://tableaucrudform.herokuapp.com/obs_list/${member}/${client}`)
             // const response = await fetch(`http://localhost:5000/obs_list/${member}/${client}`)
             const jsonData = await response.json();
             const jsonDataFormatted = jsonData.map(obsList => {
