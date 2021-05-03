@@ -286,8 +286,13 @@ export default function ListTodos(props) {
                         </tbody>
                     </table>
                 </form> */}
-
-                <h1 className='text-center mt-5' style={{ fontSize: '30px' }}>Edit Obs List</h1>
+                <h1 className='mt-1' style={{ fontSize: '30px' }}>Instructions</h1>
+                <p>
+                    Hover over the Client you wish to edit on the Dashboard to the left. When the tooltip appears click on the URL action at the bottom. <br />
+                    This user interface allows an analyst to add, edit or remove the Observation List attribute over a date range for a given Client of a Member. <br />
+                    The analyst may also add, edit or remove Comments over a date range for a given Client of a Member.
+                </p>
+                <h1 className='mt-5' style={{ fontSize: '30px' }}>Edit Observation List</h1>
                 <form className='d-flex' onSubmit={onSubmitObsForm}>
                     <table className="table mt-1" style={{ tableLayout: 'fixed' }}>
                         <thead>
@@ -328,7 +333,7 @@ export default function ListTodos(props) {
 
 
 
-                <h1 className='text-center mt-5' style={{ fontSize: '30px' }}>Edit Comments</h1>
+                <h1 className='mt-5' style={{ fontSize: '30px' }}>Edit Comments</h1>
                 <form className='d-flex' onSubmit={onSubmitCommentsForm}>
                     <table className="table mt-1">
                         <thead>
@@ -366,6 +371,18 @@ export default function ListTodos(props) {
                         </tbody>
                     </table>
                 </form>
+
+                <div style={{ float: 'right' }}>
+                    <h1 className='mt-5' style={{ fontSize: '30px', marginRight: '250px' }}>About</h1>
+                    <p>Inspired by a blog from Timothy on Biztory: <br />
+                        <a href="https://www.biztory.com/blog/2017/10/09/interactive-commenting-solution-tableau-server">Commenting Solution Tableau Server</a> <br />
+                    </p>
+                    <p>Created by Thomas Jaeger using the MERN stack: <br />
+                        <a href='http://github.com/deafult2010/Tableau-CRUD'>
+                            <span className='fab fa-github' /> Github
+                </a>
+                    </p>
+                </div>
             </div>
         </Fragment>
     )
